@@ -44,7 +44,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       whileHover={{ y: -4 }}
-      className="group relative flex flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-900/50"
+      className="group relative flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 transition-all hover:border-blue-200 hover:shadow-xl hover:shadow-blue-500/5 dark:border-slate-800 dark:bg-slate-900 dark:hover:border-blue-900/50"
     >
       {/* Header: Logo, Company & Bookmark */}
       <div className="flex items-start justify-between">
@@ -65,7 +65,7 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
             <h3 className="text-sm font-medium text-slate-500 dark:text-slate-400">
               {company}
             </h3>
-            <h2 className="mt-0.5 text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
+            <h2 className="mt-0.5 line-clamp-2 min-h-[3.75rem] text-lg font-bold text-slate-900 transition-colors group-hover:text-blue-600 dark:text-white dark:group-hover:text-blue-400">
               {title}
             </h2>
           </div>

@@ -1,4 +1,5 @@
-import React from "react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion, type Variants } from "framer-motion";
 import { Search, MapPin, TrendingUp, Sparkles } from "lucide-react";
 
@@ -14,6 +15,26 @@ const Hero: React.FC = () => {
         delayChildren: 0.2,
       },
     },
+  };
+  const navigate = useNavigate();
+
+  const [jobTitle, setJobTitle] = useState("");
+  const [location, setLocation] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const params = new URLSearchParams();
+
+    if (jobTitle.trim()) {
+      params.append("search", jobTitle);
+    }
+
+    if (location.trim()) {
+      params.append("location", location);
+    }
+
+    navigate(`/jobs?${params.toString()}`);
   };
 
   const itemVariants: Variants = {
@@ -72,7 +93,7 @@ const Hero: React.FC = () => {
           {/* Search Area */}
           <motion.div variants={itemVariants} className="mx-auto max-w-4xl">
             <form
-              onSubmit={(e) => e.preventDefault()}
+              onSubmit={handleSearch}
               className="flex flex-col gap-3 rounded-2xl border border-slate-200 bg-white/70 p-3 shadow-2xl backdrop-blur-xl md:flex-row md:items-center dark:border-slate-800 dark:bg-slate-900/70"
             >
               {/* Job Title Input */}
@@ -87,6 +108,8 @@ const Hero: React.FC = () => {
                   type="text"
                   placeholder="Job title, keywords, or company"
                   className="w-full rounded-xl border-none bg-transparent py-3.5 pr-4 pl-12 text-slate-900 focus:ring-2 focus:ring-blue-500 dark:text-white dark:placeholder:text-slate-500"
+                  value={jobTitle}
+                  onChange={(e) => setJobTitle(e.target.value)}
                 />
               </div>
 
@@ -105,6 +128,8 @@ const Hero: React.FC = () => {
                   type="text"
                   placeholder="City, state, or remote"
                   className="w-full rounded-xl border-none bg-transparent py-3.5 pr-4 pl-12 text-slate-900 focus:ring-2 focus:ring-blue-500 dark:text-white dark:placeholder:text-slate-500"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
                 />
               </div>
 
