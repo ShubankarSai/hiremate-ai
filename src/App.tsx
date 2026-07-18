@@ -7,6 +7,7 @@ import Jobs from "./pages/Jobs/Jobs";
 import SavedJobs from "./pages/SavedJobs/SavedJobs";
 import SignIn from "./pages/SignIn/SignIn";
 import NotFound from "./pages/NotFound/NotFound";
+import JobDetails from "./pages/JobDetails/JobDetails";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/jobs" element={<Jobs />} />
+        <Route path="/jobs/:slug" element={<JobDetails />} />
         <Route path="/saved" element={<SavedJobs />} />
         <Route path="/signin" element={<SignIn />} />
         <Route path="*" element={<NotFound />} />

@@ -2,7 +2,10 @@ import React from "react";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import JobCard from "./JobCard";
-import { MOCK_JOBS } from "../../data/mockJobs";
+import { useEffect, useState } from "react";
+import { getJobs } from "../../services/jobService";
+import { mapApiJobToCardJob } from "../../utils/jobMapper";
+import type { Job } from "../../types/job";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -24,6 +27,20 @@ const itemVariants = {
 };
 
 const FeaturedJobs: React.FC = () => {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchJobs = async () => {
+      const data = await getJobs();
+
+      setJobs(data.slice(0, 6));
+      setLoading(false);
+    };
+
+    fetchJobs();
+  }, []);
+
   return (
     <section className="bg-slate-950 py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -56,11 +73,17 @@ const FeaturedJobs: React.FC = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3"
         >
-          {MOCK_JOBS.map((job) => (
-            <motion.div key={job.id} variants={itemVariants}>
-              <JobCard job={job} />
-            </motion.div>
-          ))}
+          {loading ? (
+            <p className="col-span-full text-center text-slate-400">
+              Loading featured jobs...
+            </p>
+          ) : (
+            jobs.map((job) => (
+              <motion.div key={job.slug} variants={itemVariants}>
+                <JobCard job={mapApiJobToCardJob(job)} />
+              </motion.div>
+            ))
+          )}
         </motion.div>
 
         {/* Bottom CTA */}

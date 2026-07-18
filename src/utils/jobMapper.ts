@@ -13,5 +13,6 @@ export const mapApiJobToCardJob = (job: ApiJob): CardJob => {
     postedAt: new Date(job.created_at).toLocaleDateString(),
     tags: job.tags?.slice(0, 4) ?? [],
     logo: undefined,
+    url: job.url,
   };
 };

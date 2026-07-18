@@ -1,5 +1,7 @@
+import { useSavedJobs } from "../../context/SavedJobsContext";
 import React from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import {
   MapPin,
   Briefcase,
@@ -8,6 +10,7 @@ import {
   Bookmark,
   ChevronRight,
   Building2,
+  BookmarkCheck,
 } from "lucide-react";
 
 export interface Job {
@@ -20,6 +23,7 @@ export interface Job {
   salary: string;
   postedAt: string;
   tags: string[];
+  url: string;
 }
 
 interface JobCardProps {
@@ -36,7 +40,10 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
     salary,
     postedAt,
     tags,
+    url,
   } = job;
+
+  const { toggleSavedJob, isSaved } = useSavedJobs();
 
   return (
     <motion.div
@@ -74,8 +81,13 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
           type="button"
           aria-label="Save job"
           className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-100 hover:text-blue-600 dark:text-slate-500 dark:hover:bg-slate-800 dark:hover:text-blue-400"
+          onClick={() => toggleSavedJob(job.id)}
         >
-          <Bookmark size={20} />
+          {isSaved(job.id) ? (
+            <BookmarkCheck className="text-blue-500" />
+          ) : (
+            <Bookmark />
+          )}
         </button>
       </div>
 
@@ -116,14 +128,15 @@ const JobCard: React.FC<JobCardProps> = ({ job }) => {
 
       {/* Action Footer */}
       <div className="mt-6 flex items-center justify-between border-t border-slate-100 pt-5 dark:border-slate-800">
-        <button
-          type="button"
+        <Link
+          to={`/jobs/${job.id}`}
           className="text-sm font-semibold text-blue-600 transition-colors hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300"
         >
           View Details
-        </button>
+        </Link>
         <button
           type="button"
+          onClick={() => window.open(url, "_blank")}
           className="inline-flex items-center gap-2 rounded-xl bg-slate-900 px-5 py-2 text-sm font-bold text-white transition-all hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/25 active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-blue-500 dark:hover:text-white"
         >
           Apply Now

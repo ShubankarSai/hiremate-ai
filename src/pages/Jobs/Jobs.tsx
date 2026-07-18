@@ -8,6 +8,7 @@ import { mapApiJobToCardJob } from "../../utils/jobMapper";
 const Jobs = () => {
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [visibleJobs, setVisibleJobs] = useState(12);
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get("search")?.toLowerCase() ?? "";
@@ -23,6 +24,12 @@ const Jobs = () => {
 
     fetchJobs();
   }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setVisibleJobs(12);
+    }, 0);
+  }, [searchQuery, locationQuery]);
 
   const filteredJobs = useMemo(() => {
     console.log("Search:", searchQuery);
@@ -64,12 +71,24 @@ const Jobs = () => {
         {loading ? (
           <p className="text-slate-600 dark:text-slate-400">Loading jobs...</p>
         ) : (
-          <div className="grid items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
-            {" "}
-            {filteredJobs.slice(0, 12).map((job) => (
-              <JobCard key={job.slug} job={mapApiJobToCardJob(job)} />
-            ))}
-          </div>
+          <>
+            <div className="grid items-stretch gap-6 sm:grid-cols-2 xl:grid-cols-3">
+              {filteredJobs.slice(0, visibleJobs).map((job) => (
+                <JobCard key={job.slug} job={mapApiJobToCardJob(job)} />
+              ))}
+            </div>
+
+            {visibleJobs < filteredJobs.length && (
+              <div className="mt-10 flex justify-center">
+                <button
+                  onClick={() => setVisibleJobs((prev) => prev + 12)}
+                  className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition-all hover:bg-blue-700 hover:shadow-lg"
+                >
+                  Load More Jobs
+                </button>
+              </div>
+            )}
+          </>
         )}
       </div>
     </main>
