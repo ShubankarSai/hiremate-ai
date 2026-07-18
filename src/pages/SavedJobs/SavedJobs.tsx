@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getJobs } from "../../services/jobService";
 import type { Job } from "../../types/job";
-import { useSavedJobs } from "../../context/SavedJobsContext";
+import { useSavedJobs } from "../../context/useSavedJobs";
 import { mapApiJobToCardJob } from "../../utils/jobMapper";
 import JobCard from "../../components/jobs/JobCard";
 

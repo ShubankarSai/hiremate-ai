@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { getJobs } from "../../services/jobService";
 import type { Job } from "../../types/job";
 import { MapPin, Briefcase, Clock } from "lucide-react";
-import { useSavedJobs } from "../../context/SavedJobsContext";
+import { useSavedJobs } from "../../context/useSavedJobs";
 
 const JobDetails = () => {
   const { slug } = useParams();

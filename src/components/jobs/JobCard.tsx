@@ -1,4 +1,4 @@
-import { useSavedJobs } from "../../context/SavedJobsContext";
+import { useSavedJobs } from "../../context/useSavedJobs";
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";

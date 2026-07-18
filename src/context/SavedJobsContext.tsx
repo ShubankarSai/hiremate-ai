@@ -1,19 +1,14 @@
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  type ReactNode,
-} from "react";
+/* eslint-disable react-refresh/only-export-components */
+import { createContext, useState, useEffect, type ReactNode } from "react";
 import { toast } from "sonner";
 
-interface SavedJobsContextType {
+export interface SavedJobsContextType {
   savedJobs: string[];
   toggleSavedJob: (id: string) => void;
   isSaved: (id: string) => boolean;
 }
 
-const SavedJobsContext = createContext<SavedJobsContextType | undefined>(
+export const SavedJobsContext = createContext<SavedJobsContextType | undefined>(
   undefined,
 );
 
@@ -22,6 +17,7 @@ export const SavedJobsProvider = ({ children }: { children: ReactNode }) => {
     const stored = localStorage.getItem("savedJobs");
     return stored ? JSON.parse(stored) : [];
   });
+
   const toggleSavedJob = (jobId: string) => {
     const isSaved = savedJobs.includes(jobId);
 
@@ -51,14 +47,4 @@ export const SavedJobsProvider = ({ children }: { children: ReactNode }) => {
       {children}
     </SavedJobsContext.Provider>
   );
-};
-
-export const useSavedJobs = () => {
-  const context = useContext(SavedJobsContext);
-
-  if (!context) {
-    throw new Error("useSavedJobs must be used inside SavedJobsProvider");
-  }
-
-  return context;
 };
