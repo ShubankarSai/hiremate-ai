@@ -49,7 +49,7 @@ HireMate AI is a modern, responsive job board that helps software engineers disc
 - Filter jobs by location
 - Responsive search interface
 
-### 💼 Job Listings
+### Job Listings
 
 - Live jobs fetched from the Arbeitnow API
 - Beautiful responsive job cards
