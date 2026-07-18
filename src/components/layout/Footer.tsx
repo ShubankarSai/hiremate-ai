@@ -25,7 +25,7 @@ const Footer: React.FC = () => {
         variants={footerSectionVariants}
         className="mx-auto max-w-7xl px-4 pt-16 pb-8 sm:px-6 lg:px-8"
       >
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-4 md:gap-8">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-5 lg:gap-8">
           {/* Brand Section */}
           <div className="col-span-1 md:col-span-1">
             <Link to="/" className="flex items-center gap-2.5">
@@ -96,6 +96,49 @@ const Footer: React.FC = () => {
               </li>
             </ul>
           </div>
+
+          {/* Project */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
+              Project
+            </h3>
+
+            <ul className="mt-4 space-y-3">
+              <li>
+                <a
+                  href="https://hiremate-ai-zeta.vercel.app/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                >
+                  Live Demo
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://github.com/ShubankarSai/hiremate-ai"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                >
+                  Source Code
+                </a>
+              </li>
+
+              <li>
+                <a
+                  href="https://github.com/ShubankarSai/hiremate-ai/actions"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
+                >
+                  CI Pipeline
+                </a>
+              </li>
+            </ul>
+          </div>
+
           {/* Social Links */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
