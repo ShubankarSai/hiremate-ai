@@ -24,12 +24,81 @@ const JobDetails = () => {
 
     fetchJob();
   }, [slug]);
+  if (!loading && !job) {
+    return (
+      <main className="flex min-h-screen items-center justify-center bg-slate-950 px-4">
+        <div className="text-center">
+          <h1 className="text-4xl font-bold text-white">Job Not Found</h1>
+
+          <p className="mt-4 text-slate-400">
+            The job you're looking for doesn't exist or may have been removed.
+          </p>
+
+          <button
+            onClick={() => window.history.back()}
+            className="mt-8 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white transition hover:bg-blue-700"
+          >
+            Go Back
+          </button>
+        </div>
+      </main>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-slate-950">
       <div className="mx-auto max-w-7xl px-4 py-12">
         {loading ? (
-          <h1 className="text-4xl font-bold text-white">Loading...</h1>
+          <div className="grid gap-10 lg:grid-cols-3 animate-pulse">
+            {/* Left Content */}
+            <div className="space-y-6 lg:col-span-2">
+              <div className="h-10 w-3/4 rounded-lg bg-slate-800"></div>
+
+              <div className="h-6 w-1/3 rounded-lg bg-slate-800"></div>
+
+              <div className="flex gap-4">
+                <div className="h-5 w-28 rounded bg-slate-800"></div>
+                <div className="h-5 w-28 rounded bg-slate-800"></div>
+                <div className="h-5 w-28 rounded bg-slate-800"></div>
+              </div>
+
+              <div className="flex gap-3">
+                <div className="h-8 w-20 rounded-full bg-slate-800"></div>
+                <div className="h-8 w-24 rounded-full bg-slate-800"></div>
+                <div className="h-8 w-20 rounded-full bg-slate-800"></div>
+              </div>
+
+              <div className="space-y-3 pt-6">
+                <div className="h-4 w-full rounded bg-slate-800"></div>
+                <div className="h-4 w-full rounded bg-slate-800"></div>
+                <div className="h-4 w-5/6 rounded bg-slate-800"></div>
+                <div className="h-4 w-full rounded bg-slate-800"></div>
+                <div className="h-4 w-4/5 rounded bg-slate-800"></div>
+              </div>
+            </div>
+
+            {/* Right Sidebar */}
+            <aside>
+              <div className="rounded-2xl border border-slate-800 bg-slate-900 p-6">
+                <div className="h-7 w-40 rounded bg-slate-800"></div>
+
+                <div className="mt-3 h-4 w-56 rounded bg-slate-800"></div>
+
+                <div className="mt-6 h-12 rounded-xl bg-slate-800"></div>
+
+                <div className="mt-3 h-12 rounded-xl bg-slate-800"></div>
+
+                <div className="my-6 border-t border-slate-800"></div>
+
+                <div className="space-y-5">
+                  <div className="h-5 w-36 rounded bg-slate-800"></div>
+                  <div className="h-5 w-32 rounded bg-slate-800"></div>
+                  <div className="h-5 w-40 rounded bg-slate-800"></div>
+                  <div className="h-5 w-28 rounded bg-slate-800"></div>
+                </div>
+              </div>
+            </aside>
+          </div>
         ) : (
           <div className="grid gap-10 lg:grid-cols-3">
             <div className="lg:col-span-2">

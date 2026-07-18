@@ -5,6 +5,8 @@ import {
   useEffect,
   type ReactNode,
 } from "react";
+import { toast } from "sonner";
+
 interface SavedJobsContextType {
   savedJobs: string[];
   toggleSavedJob: (id: string) => void;
@@ -20,10 +22,16 @@ export const SavedJobsProvider = ({ children }: { children: ReactNode }) => {
     const stored = localStorage.getItem("savedJobs");
     return stored ? JSON.parse(stored) : [];
   });
-  const toggleSavedJob = (id: string) => {
-    setSavedJobs((prev) =>
-      prev.includes(id) ? prev.filter((jobId) => jobId !== id) : [...prev, id],
-    );
+  const toggleSavedJob = (jobId: string) => {
+    const isSaved = savedJobs.includes(jobId);
+
+    if (isSaved) {
+      setSavedJobs((prev) => prev.filter((id) => id !== jobId));
+      toast.success("Removed from saved jobs");
+    } else {
+      setSavedJobs((prev) => [...prev, jobId]);
+      toast.success("Job saved successfully");
+    }
   };
 
   useEffect(() => {

@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from "sonner";
 
 import Navbar from "./components/layout/Navbar";
 
@@ -22,6 +23,8 @@ function App() {
         <Route path="/signin" element={<SignIn />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
+      <Toaster position="top-right" richColors closeButton duration={2500} />
     </BrowserRouter>
   );
 }

@@ -75,63 +75,59 @@ const Footer: React.FC = () => {
             </ul>
           </div>
 
-          {/* Resources */}
+          {/* Tech Stack */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
-              Resources
+              Tech Stack
             </h3>
+
             <ul className="mt-4 space-y-3">
-              <li>
-                <button
-                  type="button"
-                  className="text-sm text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
-                >
-                  Privacy Policy
-                </button>
+              <li className="text-sm text-slate-600 dark:text-slate-400">
+                React + Vite
               </li>
-              <li>
-                <button
-                  type="button"
-                  className="text-sm text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
-                >
-                  Terms of Service
-                </button>
+              <li className="text-sm text-slate-600 dark:text-slate-400">
+                TypeScript
               </li>
-              <li>
-                <button
-                  type="button"
-                  className="text-sm text-slate-600 transition-colors hover:text-blue-600 dark:text-slate-400 dark:hover:text-blue-400"
-                >
-                  Contact
-                </button>
+              <li className="text-sm text-slate-600 dark:text-slate-400">
+                Tailwind CSS
+              </li>
+              <li className="text-sm text-slate-600 dark:text-slate-400">
+                GitHub Actions CI
               </li>
             </ul>
           </div>
-
           {/* Social Links */}
           <div>
             <h3 className="text-sm font-bold uppercase tracking-wider text-slate-900 dark:text-white">
               Social Connect
             </h3>
             <div className="mt-4 flex gap-4">
-              <button
+              <a
+                href="https://github.com/ShubankarSai"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="GitHub"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-blue-500"
               >
                 <FaGithub />
-              </button>
-              <button
+              </a>
+              <a
+                href="https://www.linkedin.com/in/shubankarsaik/"
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label="LinkedIn"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-blue-500"
               >
                 <FaLinkedin />
-              </button>
-              <button
+              </a>
+              <a
+                href="mailto:shubhankarsai@gmail.com"
                 aria-label="Email"
+                title="Email"
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-600 transition-all hover:bg-blue-600 hover:text-white dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-blue-500"
               >
                 <Mail size={20} />
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -139,7 +135,8 @@ const Footer: React.FC = () => {
         {/* Bottom Divider */}
         <div className="mt-16 border-t border-slate-100 pt-8 dark:border-slate-800">
           <p className="text-center text-sm text-slate-500 dark:text-slate-500">
-            © {currentYear} HireMate AI. All rights reserved.
+            © {currentYear} HireMate AI • Built with React, TypeScript &
+            Tailwind CSS
           </p>
         </div>
       </motion.div>
