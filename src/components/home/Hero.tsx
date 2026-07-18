@@ -29,7 +29,7 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white pt-16 pb-24 md:pt-24 md:pb-32 lg:pt-32 lg:pb-48 dark:bg-slate-950">
+    <section className="relative overflow-hidden bg-white pt-8 pb-20 md:pt-12 md:pb-24 lg:pt-16 lg:pb-32 dark:bg-slate-950">
       {" "}
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-blue-50/50 blur-3xl dark:bg-blue-900/10" />
