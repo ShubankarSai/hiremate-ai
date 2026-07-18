@@ -30,10 +30,10 @@ const Hero: React.FC = () => {
 
   return (
     <section className="relative overflow-hidden bg-white pt-16 pb-24 md:pt-24 md:pb-32 lg:pt-32 lg:pb-48 dark:bg-slate-950">
+      {" "}
       {/* Background Decorative Elements */}
       <div className="absolute top-0 left-1/2 -z-10 h-[600px] w-[1000px] -translate-x-1/2 rounded-full bg-blue-50/50 blur-3xl dark:bg-blue-900/10" />
       <div className="absolute top-0 right-0 -z-10 h-96 w-96 translate-x-1/3 -translate-y-1/4 rounded-full bg-indigo-50/40 blur-3xl dark:bg-indigo-900/10" />
-
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center"

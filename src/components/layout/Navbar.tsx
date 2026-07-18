@@ -12,18 +12,13 @@ import {
   Moon,
 } from "lucide-react";
 
-/**
- * Constants for production configurability
- */
-const NAVBAR_SCROLL_THRESHOLD = 20;
+const SCROLL_THRESHOLD = 20;
 const MOBILE_BREAKPOINT = 768;
-
-import type { LucideIcon } from "lucide-react";
 
 interface NavItem {
   label: string;
   href: string;
-  icon: LucideIcon;
+  icon: React.ElementType;
 }
 
 const navItems: NavItem[] = [
@@ -36,20 +31,14 @@ const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
-  /**
-   * Handle scroll visibility for glassmorphism
-   */
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > NAVBAR_SCROLL_THRESHOLD);
+      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /**
-   * Auto-close mobile menu on screen resize
-   */
   useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= MOBILE_BREAKPOINT && isOpen) {
@@ -63,10 +52,8 @@ const Navbar: React.FC = () => {
   const toggleMenu = useCallback(() => setIsOpen((prev) => !prev), []);
 
   const navLinkClasses = ({ isActive }: { isActive: boolean }) =>
-    `relative flex items-center gap-2 px-1 py-2 text-sm font-medium transition-colors duration-200 ${
-      isActive
-        ? "text-blue-600 dark:text-blue-400"
-        : "text-slate-600 hover:text-slate-900 dark:text-slate-400 dark:hover:text-white"
+    `relative flex items-center gap-2 px-1 py-2 text-sm font-medium transition-colors duration-300 ${
+      isActive ? "text-blue-400" : "text-white/80 hover:text-white"
     }`;
 
   return (
@@ -75,8 +62,8 @@ const Navbar: React.FC = () => {
       aria-label="Main navigation"
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         isScrolled
-          ? "border-b border-slate-200/50 bg-white/80 backdrop-blur-md dark:border-slate-800/50 dark:bg-slate-950/80"
-          : "bg-transparent"
+          ? "border-b border-slate-800/50 bg-slate-950/95 backdrop-blur-md"
+          : "bg-slate-950"
       }`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -87,11 +74,17 @@ const Navbar: React.FC = () => {
             className="flex items-center gap-2.5 transition-transform hover:scale-[1.02] active:scale-95"
             aria-label="HireMate AI Home"
           >
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-blue-600 text-white shadow-lg shadow-blue-500/20">
+            <div
+              className={`flex h-10 w-10 items-center justify-center rounded-xl transition-colors duration-300 ${
+                isScrolled
+                  ? "bg-blue-600 text-white shadow-lg shadow-blue-500/20"
+                  : "bg-white text-blue-600"
+              }`}
+            >
               <BriefcaseBusiness size={22} />
             </div>
-            <span className="text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
-              HireMate <span className="text-blue-600">AI</span>
+            <span className="text-xl font-extrabold tracking-tight text-white">
+              HireMate <span className="text-blue-500">AI</span>
             </span>
           </Link>
 
@@ -111,7 +104,9 @@ const Navbar: React.FC = () => {
                       {isActive && (
                         <motion.div
                           layoutId="nav-active-indicator"
-                          className="absolute bottom-[-1.25rem] left-0 h-0.5 w-full rounded-full bg-blue-600"
+                          className={`absolute -bottom-[21px] left-0 h-0.5 w-full ${
+                            isScrolled ? "bg-blue-600" : "bg-white"
+                          }`}
                           transition={{
                             type: "spring",
                             stiffness: 380,
@@ -125,11 +120,14 @@ const Navbar: React.FC = () => {
               ))}
             </div>
 
-            <div className="flex items-center gap-4 border-l border-slate-200 pl-6 dark:border-slate-800">
-              {/* Dark Mode Toggle Placeholder */}
+            <div className="flex items-center gap-4 border-l border-white/20 pl-6">
               <button
                 type="button"
-                className="group relative flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+                className={`group relative flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${
+                  isScrolled
+                    ? "text-slate-500 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+                    : "text-white/80 hover:bg-white/10 hover:text-white"
+                }`}
                 aria-label="Toggle dark mode"
               >
                 <Sun className="h-5 w-5 scale-100 transition-transform group-hover:rotate-45 dark:scale-0" />
@@ -138,7 +136,7 @@ const Navbar: React.FC = () => {
 
               <Link
                 to="/signin"
-                className="inline-flex items-center gap-2 rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white transition-all hover:bg-slate-800 hover:shadow-lg active:scale-95 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 transition-all hover:bg-slate-100 active:scale-95"
               >
                 <LogIn size={16} />
                 Sign In
@@ -150,7 +148,9 @@ const Navbar: React.FC = () => {
           <div className="flex items-center gap-2 md:hidden">
             <button
               type="button"
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-500 dark:text-slate-400"
+              className={`flex h-9 w-9 items-center justify-center rounded-lg transition-colors ${
+                isScrolled ? "text-slate-500 dark:text-slate-400" : "text-white"
+              }`}
               aria-label="Toggle dark mode"
             >
               <Sun size={20} className="dark:hidden" />
@@ -160,7 +160,11 @@ const Navbar: React.FC = () => {
             <button
               onClick={toggleMenu}
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+              className={`inline-flex h-10 w-10 items-center justify-center rounded-lg transition-colors ${
+                isScrolled
+                  ? "text-slate-600 hover:bg-slate-100 dark:text-slate-400 dark:hover:bg-slate-800"
+                  : "text-white hover:bg-white/10"
+              }`}
               aria-expanded={isOpen}
               aria-controls="mobile-menu"
               aria-label="Main menu"
@@ -176,11 +180,11 @@ const Navbar: React.FC = () => {
         {isOpen && (
           <motion.div
             id="mobile-menu"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-            className="absolute inset-x-0 top-full border-b border-slate-200 bg-white shadow-xl md:hidden dark:border-slate-800 dark:bg-slate-950"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="absolute inset-x-0 top-full overflow-hidden border-b border-slate-200 bg-white shadow-xl md:hidden dark:border-slate-800 dark:bg-slate-950"
           >
             <div className="flex flex-col gap-1 p-4">
               {navItems.map((item) => (
